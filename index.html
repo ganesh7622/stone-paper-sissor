@@ -1,0 +1,143 @@
+<h1>🪨📜✂️ Stone Paper Sizer</h1>
+<input id="box1">
+<button id="btn1">Stone 🪨</button>
+<button id="btn2">Paper 📜</button>
+<button id="btn3">Sizer ✂️</button>
+<button id="btn4" type="submit">Check</button>
+<p id="result">Result :</p>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    color: #fff;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  }
+
+  #box1 {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+    outline: none;
+  }
+
+  button {
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    font-weight: 600;
+    min-width: 100px;
+  }
+
+  button:hover {
+    background: #ff7eb3;
+    color: white;
+    transform: scale(1.1);
+  }
+
+  #btn4 {
+    background: #4facfe;
+    color: white;
+  }
+
+  #btn4:hover {
+    background: #00f2fe;
+  }
+
+  #result {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    button {
+      width: 80%;
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+
+    #box1 {
+      width: 80%;
+      font-size: 1rem;
+    }
+  }
+</style>
+<script>
+  var a = ['stone', 'paper', 'sizer']
+  var b = Math.floor(Math.random() * 3)
+  var random = a[b]
+  var box1 = document.querySelector("#box1")
+  var btn1 = document.querySelector("#btn1")
+  var btn2 = document.querySelector("#btn2")
+  var btn3 = document.querySelector("#btn3")
+  var btn4 = document.querySelector("#btn4")
+  var result = document.querySelector("#result")
+
+  btn1.addEventListener('click', () => {
+    box1.value = 'stone'
+  })
+  btn2.addEventListener('click', () => {
+    box1.value = 'paper'
+  })
+  btn3.addEventListener('click', () => {
+    box1.value = 'sizer'
+  })
+  console.log(a[b])
+
+  btn4.addEventListener('click', () => {
+
+
+    if (
+      box1.value == random
+    ) {
+      result.textContent = "Result : Draw 🤝"
+    }
+    else if (
+      box1.value == 'paper' && random == 'stone' ||
+      box1.value == 'stone' && random == 'sizer' ||
+      box1.value == 'sizer' && random == 'paper'
+    ) {
+      result.textContent = "Result :" + "Result : WOW You Won 🎉🏆";
+    }
+    else {
+      alert("Better luck next time 😢")
+    }
+  })
+
+</script>
