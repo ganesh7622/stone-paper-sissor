@@ -1,143 +1,167 @@
-<h1>🪨📜✂️ Stone Paper Sizer</h1>
-<input id="box1">
-<button id="btn1">Stone 🪨</button>
-<button id="btn2">Paper 📜</button>
-<button id="btn3">Sizer ✂️</button>
-<button id="btn4" type="submit">Check</button>
-<p id="result">Result :</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone Paper Sissor</title>
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-  }
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
-  body {
-    background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    color: #fff;
-  }
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
-  h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #fff;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  }
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a5acd, #836fff);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: white;
+        }
 
-  #box1 {
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    outline: none;
-  }
+        .game-box {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-  button {
-    background: #fff;
-    border: none;
-    border-radius: 12px;
-    padding: 12px 20px;
-    margin: 10px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #333;
-    font-weight: 600;
-    min-width: 100px;
-  }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 28px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
 
-  button:hover {
-    background: #ff7eb3;
-    color: white;
-    transform: scale(1.1);
-  }
+        input {
+            width: 90%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+            outline: none;
+        }
 
-  #btn4 {
-    background: #4facfe;
-    color: white;
-  }
+        button {
+            padding: 12px 18px;
+            font-size: 16px;
+            border: none;
+            margin: 6px;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
 
-  #btn4:hover {
-    background: #00f2fe;
-  }
+        #btn1 { background: #ffb347; }
+        #btn2 { background: #77dd77; }
+        #btn3 { background: #ff6961; }
+        #btn4 { background: #1e90ff; }
 
-  #result {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
-    border-radius: 10px;
-  }
+        button:hover {
+            transform: scale(1.08);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+        }
 
-  /* Responsive Design */
-  @media (max-width: 600px) {
-    h1 {
-      font-size: 2rem;
-    }
+        #result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-    button {
-      width: 80%;
-      font-size: 1rem;
-      margin: 8px 0;
-    }
+        #comp-choice {
+            margin-top: 15px;
+            font-size: 20px;
+        }
 
-    #box1 {
-      width: 80%;
-      font-size: 1rem;
-    }
-  }
-</style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 500px) {
+            h1 { font-size: 24px; }
+            button { width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-box">
+
+        <h1>🪨📜✂️ Stone Paper Sissor</h1>
+
+        <input id="box1" placeholder="Your Choice">
+
+        <button id="btn1">Stone 🪨</button>
+        <button id="btn2">Paper 📜</button>
+        <button id="btn3">Sissor✂️</button>
+        <button id="btn4" type="submit">Check</button>
+
+        <p id="result">Result :</p>
+        <h2 id="comp-choice">Computer Choice :</h2>
+
+    </div>
+
 <script>
-  var a = ['stone', 'paper', 'sizer']
-  var b = Math.floor(Math.random() * 3)
-  var random = a[b]
-  var box1 = document.querySelector("#box1")
-  var btn1 = document.querySelector("#btn1")
-  var btn2 = document.querySelector("#btn2")
-  var btn3 = document.querySelector("#btn3")
-  var btn4 = document.querySelector("#btn4")
-  var result = document.querySelector("#result")
+  var a = ['stone', 'paper', 'sissor'];
 
-  btn1.addEventListener('click', () => {
-    box1.value = 'stone'
-  })
-  btn2.addEventListener('click', () => {
-    box1.value = 'paper'
-  })
-  btn3.addEventListener('click', () => {
-    box1.value = 'sizer'
-  })
-  console.log(a[b])
+  var box1 = document.querySelector("#box1");
+  var btn1 = document.querySelector("#btn1");
+  var btn2 = document.querySelector("#btn2");
+  var btn3 = document.querySelector("#btn3");
+  var btn4 = document.querySelector("#btn4");
+  var result = document.querySelector("#result");
+  var compChoice = document.querySelector("#comp-choice");
 
+  // Button click actions
+  btn1.addEventListener('click', () => box1.value = 'stone');
+  btn2.addEventListener('click', () => box1.value = 'paper');
+  btn3.addEventListener('click', () => box1.value = 'sissor');
+
+  // Check button logic
   btn4.addEventListener('click', () => {
 
+    // New random every click
+    let random = a[Math.floor(Math.random() * 3)];
 
-    if (
-      box1.value == random
-    ) {
-      result.textContent = "Result : Draw 🤝"
+    // Show computer choice with animation
+    compChoice.textContent = "Computer Choice : " + random;
+    gsap.from("#comp-choice", { duration: 0.6, opacity: 0, y: -15 });
+
+    // Game logic
+    if (box1.value == random) {
+      result.textContent = "Draw 🤝";
     }
     else if (
-      box1.value == 'paper' && random == 'stone' ||
-      box1.value == 'stone' && random == 'sizer' ||
-      box1.value == 'sizer' && random == 'paper'
+      (box1.value == 'paper' && random == 'stone') ||
+      (box1.value == 'stone' && random == 'sissor') ||
+      (box1.value == 'sizer' && random == 'paper')
     ) {
-      result.textContent = "Result :" + "Result : WOW You Won 🎉🏆";
+      result.textContent = "WOW You Won 🎉🏆";
     }
     else {
-      alert("Better luck next time 😢")
+      alert("You Lose 😢")
     }
-  })
 
+    // Animation for result
+   
+  });
+
+  // Fade-in animation for game box
+  
 </script>
+
+</body>
+</html>
